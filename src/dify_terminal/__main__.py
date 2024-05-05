@@ -31,7 +31,8 @@ def user_say(what: str):
 
             if answer := dic.get("answer"):
                 accumulated_answer += answer
-                print("\r", accumulated_answer, end="")
+                # ref: https://stackoverflow.com/a/3249539/11397457
+                print(accumulated_answer, end='\r', flush=True)
 
 
 def main():
