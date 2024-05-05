@@ -3,14 +3,14 @@ name = "dify-terminal"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [
-    {name = "boholder", email = "bottleholder@anche.no"},
+    { name = "boholder", email = "bottleholder@anche.no" },
 ]
 dependencies = [
     "dify-client>=0.1.10",
 ]
 requires-python = ">=3.12"
 readme = "README.md"
-license = {text = "MIT"}
+license = { text = "MIT" }
 
 [build-system]
 requires = ["pdm-backend"]
@@ -19,3 +19,37 @@ build-backend = "pdm.backend"
 
 [tool.pdm]
 distribution = true
+
+# Scripts for development
+[tool.pdm.scripts]
+lint = "pre-commit run --all-files"
+
+[tool.ruff]
+line-length = 120
+exclude = ["tests/fixtures"]
+target-version = "py311"
+src = ["app", "tests"]
+
+[tool.ruff.lint]
+extend-select = [
+    "I", # isort
+    "B", # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "PGH", # pygrep-hooks
+    "RUF", # ruff
+    "W", # pycodestyle
+    "YTT", # flake8-2020
+]
+extend-ignore = ["B018", "B019", "RUF018"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.codespell]
+ignore-words-list = "ba,te,falsy"
+
+[project.scripts]
+difyt = "dify_terminal.__main__:main"
